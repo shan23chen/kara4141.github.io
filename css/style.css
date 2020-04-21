@@ -103,7 +103,9 @@ a:hover::after{
 }
 
 /* The End */
-
+.linkxx {
+  color: red;
+}
 .note{
   top: auto;
   bottom: 0;
