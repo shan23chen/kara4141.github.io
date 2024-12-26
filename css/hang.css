@@ -1,0 +1,93 @@
+/* Default (Light) Theme */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #212529;
+    --link-color: #A41034;
+    --nav-bg-color: #A41034;
+    --nav-text-color: #ffffff;
+    --card-bg-color: #ffffff;
+    --card-border-color: #e0e0e0;
+  }
+  
+  /* Dark Theme */
+  [data-theme="dark"] {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --link-color: #bb86fc;
+    --nav-bg-color: #1f1f1f;
+    --nav-text-color: #e0e0e0;
+    --card-bg-color: #1f1f1f;
+    --card-border-color: #333333;
+  }
+  
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Open Sans', sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .navbar {
+    background-color: var(--nav-bg-color);
+    box-shadow: 0 4px 6px -6px #222;
+    transition: background-color 0.3s;
+  }
+  
+  .navbar .nav-link {
+    color: var(--nav-text-color) !important;
+  }
+  
+  a {
+    color: var(--link-color);
+  }
+  
+  a:hover {
+    color: var(--link-color);
+    text-decoration: underline;
+  }
+  
+  h3 {
+    color: var(--text-color);
+  }
+  
+  h4 {
+    color: var(--text-color);
+  }
+  
+  p, li {
+    color: var(--text-color);
+  }
+  
+  .card {
+    background-color: var(--card-bg-color);
+    border-color: var(--card-border-color);
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .container {
+    padding-top: 23px;
+  }
+  
+  footer {
+    margin-top: 13px;
+  }
+  
+  /* Smooth transitions for all elements */
+  * {
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+@import url('https://fonts.googleapis.com/css2?family=Macondo&display=swap');
+
+h3 {
+    font-family: 'Macondo', cursive;
+    font-size: 2rem;
+    font-weight: 400;  /* Macondo looks better with regular weight */
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+}
