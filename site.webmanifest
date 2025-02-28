@@ -1,0 +1,22 @@
+{
+  "name": "Shan Chen - PhD Student at Harvard-MGB AIM",
+  "short_name": "Shan Chen",
+  "description": "Personal website of Shan Chen, PhD student at Harvard-MGB AIM specializing in NLP, healthcare AI, and large language models",
+  "icons": [
+    {
+      "src": "img/shan.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "img/shan.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#A41034",
+  "background_color": "#FBFDFF",
+  "display": "standalone",
+  "start_url": "modern_index.html",
+  "orientation": "portrait"
+}
