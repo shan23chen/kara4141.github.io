@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Check for saved theme preference or use OS preference
     const currentTheme = localStorage.getItem('theme') || 
                          (prefersDarkScheme.matches ? 'dark' : 'light');
-    
+   
     // Apply the theme on initial load
     if (currentTheme === 'dark') {
         document.body.setAttribute('data-theme', 'dark');
