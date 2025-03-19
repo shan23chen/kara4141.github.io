@@ -83,6 +83,31 @@
             margin-bottom: 30px;
             line-height: 1.6;
         }
+        
+        .download-link {
+            display: inline-block;
+            background-color: #A41034;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-bottom: 15px;
+            transition: background-color 0.3s;
+        }
+        
+        .download-link:hover {
+            background-color: #7d0c28;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .dark-mode .download-link {
+            background-color: #2962ff;
+        }
+        
+        .dark-mode .download-link:hover {
+            background-color: #0039cb;
+        }
     </style>
 </head>
 
@@ -126,12 +151,20 @@
             
             <div class="materials-intro">
                 <p>In the interest of improving equity in access to application materials, copies of my job and fellowship application states are available here.</p>
-                <p>If you have questions about these materials or would like to discuss the application process, please feel free to contact me at <code>''.join(list('ude.dravrah@358chs')[::-1])</code>.</p>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const email = 'shc358@harvard.edu';
+                        document.getElementById('email-display').textContent = email.split('').reverse().join('');
+                    });
+                </script>
             </div>
             
             <h2>Google PhD Fellowship 2024</h2>
+            <p><a href="img/google_fellowship.pdf" download class="download-link"><i class="fas fa-download"></i> Download PDF</a></p>
             <div class="pdf-container">
-                <iframe class="pdf-embed" src="img/google_fellowship.pdf" title="Google PhD Fellowship Application"></iframe>
+                <object class="pdf-embed" data="img/google_fellowship.pdf" type="application/pdf">
+                    <p>It appears your browser doesn't support embedded PDFs. You can <a href="img/google_fellowship.pdf">download the PDF here</a> instead.</p>
+                </object>
             </div>
         </div>
     </div>
