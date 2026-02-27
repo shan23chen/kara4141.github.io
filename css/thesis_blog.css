@@ -1,0 +1,194 @@
+.thesis-blog-shell {
+  max-width: 1340px;
+}
+
+.thesis-blog-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 290px;
+  gap: 18px;
+  align-items: start;
+}
+
+.thesis-blog-article-wrap {
+  border: 1px solid var(--tr-line);
+  border-radius: 14px;
+  background: var(--tr-paper);
+  box-shadow: 0 14px 28px rgba(19, 10, 8, 0.08);
+  overflow: hidden;
+}
+
+.thesis-blog-article {
+  max-width: 1020px;
+  margin: 0 auto;
+  padding: 34px;
+}
+
+.thesis-blog-panel {
+  position: sticky;
+  top: 92px;
+  border: 1px solid var(--tr-line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  padding: 12px;
+  max-height: calc(100vh - 108px);
+  overflow: auto;
+}
+
+:root[data-theme='dark'] .thesis-blog-panel {
+  background: rgba(26, 34, 45, 0.92);
+}
+
+.thesis-blog-panel h2 {
+  margin: 0 0 8px;
+  font-size: .86rem;
+  color: var(--tr-muted);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+#blog-toc {
+  display: grid;
+  gap: 4px;
+}
+
+#blog-toc a {
+  color: #4d4341;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  padding: 5px 7px;
+  font-size: .86rem;
+  line-height: 1.35;
+  transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+
+:root[data-theme='dark'] #blog-toc a {
+  color: #d2dbe5;
+}
+
+#blog-toc a:hover {
+  background: rgba(138, 31, 49, 0.08);
+  color: var(--tr-accent);
+}
+
+:root[data-theme='dark'] #blog-toc a:hover {
+  background: rgba(242, 174, 184, 0.1);
+}
+
+#blog-toc a.active {
+  background: var(--tr-accent);
+  color: #fff;
+  border-color: var(--tr-accent);
+}
+
+.thesis-blog-actions {
+  margin-top: 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.thesis-blog-actions a {
+  border: 1px solid var(--tr-line);
+  border-radius: 8px;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  color: var(--tr-ink);
+  font-size: .84rem;
+  font-family: 'Space Grotesk', sans-serif;
+  transition: border-color .2s ease, color .2s ease, background .2s ease;
+}
+
+.thesis-blog-actions a:hover {
+  border-color: var(--tr-accent);
+  color: var(--tr-accent);
+  background: rgba(138, 31, 49, 0.06);
+}
+
+:root[data-theme='dark'] .thesis-blog-actions a:hover {
+  background: rgba(242, 174, 184, 0.06);
+}
+
+@media (max-width: 1050px) {
+  .thesis-blog-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .thesis-blog-panel {
+    position: relative;
+    top: 0;
+    max-height: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .thesis-blog-article {
+    padding: 18px 14px;
+  }
+}
+
+/* ── Glossary Styling ─────────────────────────── */
+
+.glossary-heading {
+  font-family: 'Libre Baskerville', serif !important;
+  font-size: clamp(1.5rem, 2.2vw, 2rem) !important;
+  color: var(--tr-accent) !important;
+  text-align: center;
+  margin: 2.5rem 0 1.2rem !important;
+  padding: 1.2rem 0 !important;
+  border-top: 2px solid var(--tr-accent);
+  border-bottom: 1px solid var(--tr-line);
+}
+
+.glossary-list {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 1.2rem 0 2rem !important;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.glossary-item {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0.85rem 1rem !important;
+  background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(245,232,220,0.9));
+  border: 1px solid var(--tr-line);
+  border-left: 4px solid var(--tr-accent);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glossary-item:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+:root[data-theme='dark'] .glossary-item {
+  background: linear-gradient(135deg, rgba(34,43,56,0.95), rgba(45,35,42,0.9));
+  border-left-color: var(--tr-accent);
+}
+
+.glossary-term {
+  display: block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--tr-accent);
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.02em;
+}
+
+.glossary-def {
+  display: block;
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--tr-ink);
+}
+
+:root[data-theme='dark'] .glossary-def {
+  color: #d2dbe5;
+}

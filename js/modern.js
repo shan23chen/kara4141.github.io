@@ -8,37 +8,45 @@ document.addEventListener('DOMContentLoaded', function () {
     const currentTheme = localStorage.getItem('theme') ||
         (prefersDarkScheme.matches ? 'dark' : 'light');
 
-    // Apply the theme on initial load
-    if (currentTheme === 'dark') {
-        document.body.setAttribute('data-theme', 'dark');
-        themeToggle.querySelector('i').classList.remove('fa-moon');
-        themeToggle.querySelector('i').classList.add('fa-sun');
-        mobileThemeToggle.querySelector('i').classList.remove('fa-moon');
-        mobileThemeToggle.querySelector('i').classList.add('fa-sun');
+    function applyTheme(theme) {
+        const isDark = theme === 'dark';
+
+        if (isDark) {
+            document.body.setAttribute('data-theme', 'dark');
+            document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+            document.body.removeAttribute('data-theme');
+            document.documentElement.removeAttribute('data-theme');
+        }
+
+        const desktopIcon = themeToggle?.querySelector('i');
+        const mobileIcon = mobileThemeToggle?.querySelector('i');
+
+        if (desktopIcon) {
+            desktopIcon.classList.toggle('fa-moon', !isDark);
+            desktopIcon.classList.toggle('fa-sun', isDark);
+        }
+
+        if (mobileIcon) {
+            mobileIcon.classList.toggle('fa-moon', !isDark);
+            mobileIcon.classList.toggle('fa-sun', isDark);
+        }
     }
+
+    // Apply the theme on initial load
+    applyTheme(currentTheme);
 
     // Theme toggle click handler
     function toggleTheme() {
-        if (document.body.getAttribute('data-theme') === 'dark') {
-            // Switch to light mode
-            document.body.removeAttribute('data-theme');
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark' ||
+            document.body.getAttribute('data-theme') === 'dark';
+
+        if (isDark) {
+            applyTheme('light');
             localStorage.setItem('theme', 'light');
-
-            // Update icons
-            themeToggle.querySelector('i').classList.remove('fa-sun');
-            themeToggle.querySelector('i').classList.add('fa-moon');
-            mobileThemeToggle.querySelector('i').classList.remove('fa-sun');
-            mobileThemeToggle.querySelector('i').classList.add('fa-moon');
         } else {
-            // Switch to dark mode
-            document.body.setAttribute('data-theme', 'dark');
+            applyTheme('dark');
             localStorage.setItem('theme', 'dark');
-
-            // Update icons
-            themeToggle.querySelector('i').classList.remove('fa-moon');
-            themeToggle.querySelector('i').classList.add('fa-sun');
-            mobileThemeToggle.querySelector('i').classList.remove('fa-moon');
-            mobileThemeToggle.querySelector('i').classList.add('fa-sun');
         }
     }
 
