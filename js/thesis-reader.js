@@ -50,7 +50,7 @@
     const p = document.getElementById('chapter-page-subtitle');
     if (p) p.textContent = SPECIAL_CHAPTERS.has(chapterNum)
       ? ''
-      : 'Standalone chapter page with cleaned formatting, figures, and citations.';
+      : chapterTitles[chapterNum] || '';
     document.title = SPECIAL_CHAPTERS.has(chapterNum)
       ? `${title} | Shan Chen Thesis`
       : `Chapter ${chapterNum} | Shan Chen Thesis`;
@@ -271,9 +271,6 @@
         e.preventDefault();
         const first = articleEl.querySelector('figure.chapter-figure img');
         first?.click();
-      } else if (e.key === 'Escape' && lightbox?.isOpen()) {
-        e.preventDefault();
-        lightbox.close();
       }
     });
   }
@@ -588,13 +585,22 @@
 
     const prev = getPrevHref();
     const next = getNextHref();
+    const prevNum = chapterNum - 1;
+    const nextNum = chapterNum + 1;
 
     footer.innerHTML = '';
 
     const left = document.createElement('a');
     left.className = 'chapter-nav-link';
     left.href = prev || 'thesis.html';
-    left.textContent = prev ? 'Previous Chapter' : 'Thesis Index';
+    if (prev) {
+      const label = SPECIAL_CHAPTERS.has(prevNum)
+        ? chapterTitles[prevNum]
+        : 'Ch. ' + prevNum;
+      left.innerHTML = '<span class="nav-arrow">&larr;</span> ' + label;
+    } else {
+      left.innerHTML = '<span class="nav-arrow">&larr;</span> Thesis Index';
+    }
 
     const center = document.createElement('a');
     center.className = 'chapter-nav-link center';
@@ -604,7 +610,14 @@
     const right = document.createElement('a');
     right.className = 'chapter-nav-link';
     right.href = next || 'thesis.html';
-    right.textContent = next ? 'Next Chapter' : 'Thesis Index';
+    if (next) {
+      const label = SPECIAL_CHAPTERS.has(nextNum)
+        ? chapterTitles[nextNum]
+        : 'Ch. ' + nextNum;
+      right.innerHTML = label + ' <span class="nav-arrow">&rarr;</span>';
+    } else {
+      right.innerHTML = 'Thesis Index <span class="nav-arrow">&rarr;</span>';
+    }
 
     footer.appendChild(left);
     footer.appendChild(center);
@@ -671,6 +684,93 @@
     });
   }
 
+  function initMobileTocDrawer() {
+    // Create overlay
+    var overlay = document.createElement('div');
+    overlay.className = 'toc-drawer-overlay';
+    document.body.appendChild(overlay);
+
+    // Create drawer
+    var drawer = document.createElement('div');
+    drawer.className = 'toc-drawer';
+    drawer.innerHTML =
+      '<div class="toc-drawer-header">' +
+        '<h2>Sections</h2>' +
+        '<button class="toc-drawer-close" aria-label="Close sections">&times;</button>' +
+      '</div>' +
+      '<nav id="drawer-toc"></nav>';
+    document.body.appendChild(drawer);
+
+    // Create FAB
+    var fab = document.createElement('button');
+    fab.className = 'toc-fab';
+    fab.setAttribute('aria-label', 'Open table of contents');
+    fab.innerHTML = '<i class="fas fa-list-ul"></i> Sections';
+    document.body.appendChild(fab);
+
+    var closeBtn = drawer.querySelector('.toc-drawer-close');
+
+    function openDrawer() {
+      drawer.classList.add('open');
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawer() {
+      drawer.classList.remove('open');
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    fab.addEventListener('click', openDrawer);
+    closeBtn.addEventListener('click', closeDrawer);
+    overlay.addEventListener('click', closeDrawer);
+
+    // Escape key closes drawer
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && drawer.classList.contains('open')) {
+        closeDrawer();
+        fab.focus();
+      }
+    });
+
+    // Auto-close if viewport crosses desktop breakpoint
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 1020 && drawer.classList.contains('open')) {
+        closeDrawer();
+      }
+    });
+
+    return { drawer: drawer, syncToc: syncDrawerToc };
+
+    function syncDrawerToc() {
+      var drawerToc = drawer.querySelector('#drawer-toc');
+      if (!drawerToc || !tocEl) return;
+      drawerToc.innerHTML = tocEl.innerHTML;
+
+      // Mirror active state and add click-to-close
+      drawerToc.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          closeDrawer();
+        });
+      });
+
+      // Observe active changes on main TOC and mirror to drawer
+      var observer = new MutationObserver(function () {
+        var activeId = '';
+        tocEl.querySelectorAll('a.active').forEach(function (a) {
+          activeId = a.dataset.target;
+        });
+        drawerToc.querySelectorAll('a').forEach(function (a) {
+          a.classList.toggle('active', a.dataset.target === activeId);
+        });
+      });
+      observer.observe(tocEl, { subtree: true, attributes: true, attributeFilter: ['class'] });
+    }
+  }
+
+  var mobileDrawer = initMobileTocDrawer();
+
   async function loadChapter() {
     setPageTitle();
     initFontControls();
@@ -699,6 +799,7 @@
       ensureHeadingIds(articleEl);
       normalizeExternalLinks(articleEl);
       buildToc(articleEl);
+      mobileDrawer.syncToc();
       renderFooterNav();
       initProgressBar();
       const lightbox = enableFigureLightbox(articleEl);

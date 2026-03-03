@@ -909,7 +909,7 @@ footer {
 }
 
 [data-theme="dark"] .mobile-menu {
-  background-color: var(--card-bg);
+  background-color: var(--card-background);
   border-left: 1px solid var(--border-color);
 }
 
