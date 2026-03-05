@@ -273,7 +273,7 @@ body.thesis-reader[data-theme='dark'] .navbar-toggle {
 
 .reader-layout {
   display: grid;
-  grid-template-columns: 250px minmax(0, 1fr) 300px;
+  grid-template-columns: 300px minmax(0, 1fr) 250px;
   gap: 18px;
   align-items: start;
 }
@@ -306,11 +306,11 @@ body.thesis-reader[data-theme='dark'] .navbar-toggle {
 }
 
 .reader-panel-left {
-  grid-column: 1;
+  grid-column: 3;
 }
 
 .reader-panel-right {
-  grid-column: 3;
+  grid-column: 1;
 }
 
 .reader-panel h2 {
@@ -1280,6 +1280,13 @@ body.lightbox-open {
     max-height: none;
   }
 
+  /* At a Glance appears before article on mobile */
+  .reader-panel-right {
+    order: -1;
+    border-radius: 12px;
+    margin-bottom: 4px;
+  }
+
   /* Hide left panel on mobile — replaced by floating TOC drawer */
   .reader-panel-left {
     display: none;
@@ -1476,10 +1483,43 @@ body.lightbox-open {
 
   .chapter-footer {
     grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 10px 12px;
+  }
+
+  .chapter-nav-link {
+    font-size: .85em;
+    padding: 7px 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .reader-article .chapter-figure figcaption {
     max-width: 100%;
+  }
+
+  /* At a Glance panel tighter on mobile */
+  .reader-panel-right {
+    padding: 8px;
+  }
+
+  .reader-digest {
+    padding: 8px;
+  }
+
+  .reader-digest .digest-card {
+    padding: 6px;
+    margin-bottom: 6px;
+  }
+
+  .reader-digest p {
+    font-size: .82em;
+  }
+
+  /* FAB safe area for phones with home indicator */
+  .toc-fab {
+    bottom: calc(22px + env(safe-area-inset-bottom, 0px));
   }
 
   /* Tables can scroll on mobile */
@@ -1502,7 +1542,10 @@ body.lightbox-open {
   .reader-panel,
   .chapter-footer,
   .font-controls,
-  .navbar {
+  .navbar,
+  .toc-fab,
+  .toc-drawer,
+  .toc-drawer-overlay {
     display: none !important;
   }
 

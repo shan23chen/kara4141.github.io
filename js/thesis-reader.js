@@ -46,11 +46,9 @@
   function setPageTitle() {
     const title = chapterTitles[chapterNum] || 'Thesis Chapter';
     const h = document.getElementById('chapter-page-title');
-    if (h) h.textContent = SPECIAL_CHAPTERS.has(chapterNum) ? title : `Chapter ${chapterNum}: ${title}`;
+    if (h) h.textContent = SPECIAL_CHAPTERS.has(chapterNum) ? title : `Chapter ${chapterNum}`;
     const p = document.getElementById('chapter-page-subtitle');
-    if (p) p.textContent = SPECIAL_CHAPTERS.has(chapterNum)
-      ? ''
-      : chapterTitles[chapterNum] || '';
+    if (p) p.textContent = SPECIAL_CHAPTERS.has(chapterNum) ? '' : title;
     document.title = SPECIAL_CHAPTERS.has(chapterNum)
       ? `${title} | Shan Chen Thesis`
       : `Chapter ${chapterNum} | Shan Chen Thesis`;
