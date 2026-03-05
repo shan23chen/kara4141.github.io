@@ -649,24 +649,29 @@
   }
 
   function formatAuthorLine(root) {
-    // The author line is the first <p> right after the <hr> that follows chapter-subtitle
+    // Style author paragraphs located between chapter subtitle and chapter-meta.
     const subtitle = root.querySelector('.chapter-subtitle');
     if (!subtitle) return;
-    const hr = subtitle.nextElementSibling;
-    if (!hr || hr.tagName !== 'HR') return;
-    const authorP = hr.nextElementSibling;
-    if (!authorP || authorP.tagName !== 'P') return;
-    if (authorP.classList.contains('chapter-meta')) return;
-    authorP.classList.add('author-line');
-    // If there's a second paragraph that's also authors (before chapter-meta)
-    const next = authorP.nextElementSibling;
-    if (next && next.tagName === 'P' && !next.classList.contains('chapter-meta')) {
-      const nextAfter = next.nextElementSibling;
-      if (nextAfter && nextAfter.classList.contains('chapter-meta')) {
-        // Merge into author line
-        authorP.innerHTML += ', ' + next.innerHTML;
-        next.remove();
+
+    let start = subtitle.nextElementSibling;
+    if (start && start.tagName === 'HR') start = start.nextElementSibling;
+
+    let meta = start;
+    while (meta) {
+      if (meta.classList && meta.classList.contains('chapter-meta')) break;
+      if (/^H[1-3]$/i.test(meta.tagName)) {
+        meta = null;
+        break;
       }
+      meta = meta.nextElementSibling;
+    }
+    if (!meta) return;
+
+    let cur = start;
+    while (cur && cur !== meta) {
+      if (cur.tagName !== 'P' || cur.classList.contains('chapter-meta')) break;
+      cur.classList.add('author-line');
+      cur = cur.nextElementSibling;
     }
   }
 
