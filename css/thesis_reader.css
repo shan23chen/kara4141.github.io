@@ -273,7 +273,7 @@ body.thesis-reader[data-theme='dark'] .navbar-toggle {
 
 .reader-layout {
   display: grid;
-  grid-template-columns: 300px minmax(0, 1fr) 250px;
+  grid-template-columns: 260px minmax(0, 1fr) 300px;
   gap: 18px;
   align-items: start;
 }
@@ -300,17 +300,17 @@ body.thesis-reader[data-theme='dark'] .navbar-toggle {
   border-radius: 12px;
   background: var(--tr-paper);
   backdrop-filter: blur(8px);
-  padding: 12px;
+  padding: 11px;
   max-height: calc(100vh - 108px);
   overflow: auto;
 }
 
 .reader-panel-left {
-  grid-column: 3;
+  grid-column: 1;
 }
 
 .reader-panel-right {
-  grid-column: 1;
+  grid-column: 3;
 }
 
 .reader-panel h2 {
@@ -972,13 +972,13 @@ body.thesis-reader[data-theme='dark'] .navbar-toggle {
 /* ── Footer Nav ──────────────────────────────── */
 
 .reader-note {
-  font-size: 0.95em;
+  font-size: 0.88em;
   color: var(--tr-muted);
-  margin: 0 0 12px;
+  margin: 0 0 10px;
 }
 
 .shortcuts-note {
-  font-size: .78em;
+  font-size: .72em;
   letter-spacing: .01em;
   border-top: 1px dashed var(--tr-line);
   padding-top: 8px;
@@ -1074,16 +1074,16 @@ body.thesis-reader[data-theme='dark'] .navbar-toggle {
 
 .reader-digest h3 {
   margin: 0 0 4px;
-  font-size: 0.95em;
+  font-size: 0.9em;
   color: var(--tr-ink);
   font-family: 'Libre Baskerville', serif;
 }
 
 .reader-digest p {
   margin: 0;
-  font-size: 0.85em;
+  font-size: 0.8em;
   color: var(--tr-muted);
-  line-height: 1.48;
+  line-height: 1.45;
 }
 
 /* ── Prompt Examples / Code Blocks ───────────── */
@@ -1278,6 +1278,13 @@ body.lightbox-open {
     position: relative;
     top: 0;
     max-height: none;
+  }
+
+  .reader-panel-right,
+  .reader-article-wrap {
+    width: min(100%, 760px);
+    margin-left: auto;
+    margin-right: auto;
   }
 
   /* At a Glance appears before article on mobile */
