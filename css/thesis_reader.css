@@ -534,40 +534,39 @@ body.thesis-reader[data-theme='dark'] .navbar-toggle {
 }
 
 .reader-article .appendix-breaker {
-  margin: 1.8em 0 .6em;
-  padding: .55em .75em;
+  margin: 1.25em 0 .45em;
+  padding: .42em .62em;
   border: 1px solid var(--tr-line);
-  border-radius: 12px;
-  background: linear-gradient(135deg, var(--tr-accent-soft), rgba(255, 255, 255, 0.55));
+  border-radius: 10px;
+  background: rgba(138, 31, 49, 0.07);
   color: var(--tr-ink);
   font-family: 'Libre Baskerville', serif;
-  font-size: 1.22em;
   line-height: 1.35;
   display: grid;
   grid-template-columns: auto 1fr;
-  align-items: center;
-  gap: .55em;
+  align-items: start;
+  gap: .48em;
 }
 
 [data-theme='dark'] .reader-article .appendix-breaker {
-  background: linear-gradient(135deg, rgba(242, 174, 184, 0.16), rgba(32, 41, 54, 0.85));
+  background: rgba(242, 174, 184, 0.12);
 }
 
 .reader-article .appendix-index {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 2.25em;
-  height: 2.25em;
-  padding: 0 .55em;
+  min-width: 1.9em;
+  height: 1.9em;
+  padding: 0 .45em;
   border-radius: 999px;
   border: 1px solid var(--tr-line);
-  background: rgba(138, 31, 49, 0.12);
+  background: rgba(138, 31, 49, 0.14);
   color: var(--tr-accent);
   font-family: 'Space Grotesk', sans-serif;
-  font-size: .62em;
+  font-size: .56em;
   font-weight: 700;
-  letter-spacing: .08em;
+  letter-spacing: .06em;
   text-transform: uppercase;
 }
 
@@ -577,12 +576,14 @@ body.thesis-reader[data-theme='dark'] .navbar-toggle {
 
 .reader-article .appendix-title {
   display: block;
+  font-size: 1em;
+  font-weight: 600;
 }
 
 .reader-article .appendix-linkline {
-  margin-top: -0.05em;
-  margin-bottom: .8em;
-  font-size: .92em;
+  margin-top: .05em;
+  margin-bottom: .65em;
+  font-size: .86em;
   color: var(--tr-muted);
 }
 
@@ -1181,7 +1182,19 @@ body.lightbox-open {
   overflow: hidden;
 }
 
+.thesis-hero .kicker,
+.thesis-hero .thesis-author-line {
+  max-width: 56ch;
+  margin-left: auto;
+  margin-right: auto;
+  text-wrap: balance;
+}
+
 .thesis-hero h1 {
+  max-width: 34ch;
+  margin-left: auto;
+  margin-right: auto;
+  text-wrap: balance;
   font-size: 2.4em;
   line-height: 1.22;
   letter-spacing: -0.02em;
@@ -1192,8 +1205,10 @@ body.lightbox-open {
   font-size: .92em;
   font-weight: 500;
   color: var(--tr-muted);
-  margin-top: 8px;
+  margin-top: 10px;
   letter-spacing: .02em;
+  line-height: 1.45;
+  max-width: 54ch;
 }
 
 .thesis-hero-accent {
@@ -1267,6 +1282,10 @@ body.lightbox-open {
 .toc-drawer { display: none; }
 .toc-drawer-overlay { display: none; }
 
+body.thesis-reader.toc-open {
+  overflow: hidden;
+}
+
 @media (max-width: 1020px) {
   .reader-layout {
     grid-template-columns: 1fr;
@@ -1282,7 +1301,8 @@ body.lightbox-open {
 
   .reader-panel-right,
   .reader-article-wrap {
-    width: min(100%, 760px);
+    width: 100%;
+    max-width: 760px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -1343,6 +1363,11 @@ body.lightbox-open {
   }
 
   /* TOC Drawer */
+  .toc-drawer,
+  .toc-drawer-overlay {
+    display: block;
+  }
+
   .toc-drawer-overlay {
     position: fixed;
     inset: 0;
@@ -1482,6 +1507,12 @@ body.lightbox-open {
 
   .thesis-hero h1 {
     font-size: 1.7em;
+    max-width: 18ch;
+  }
+
+  .thesis-hero .thesis-author-line {
+    font-size: .86em;
+    max-width: 32ch;
   }
 
   .reader-article {
@@ -1527,6 +1558,20 @@ body.lightbox-open {
   /* FAB safe area for phones with home indicator */
   .toc-fab {
     bottom: calc(22px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .reader-article .appendix-breaker {
+    grid-template-columns: 1fr;
+    gap: .28em;
+    padding: .4em .55em;
+  }
+
+  .reader-article .appendix-index {
+    justify-self: start;
+  }
+
+  .reader-article .appendix-title {
+    font-size: .95em;
   }
 
   /* Tables can scroll on mobile */

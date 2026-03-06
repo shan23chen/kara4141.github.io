@@ -688,6 +688,10 @@
   }
 
   function initMobileTocDrawer() {
+    // Clear any stale scroll lock state.
+    document.body.classList.remove('toc-open');
+    document.body.style.overflow = '';
+
     // Create overlay
     var overlay = document.createElement('div');
     overlay.className = 'toc-drawer-overlay';
@@ -695,10 +699,15 @@
 
     // Create drawer
     var drawer = document.createElement('div');
+    drawer.id = 'toc-drawer';
     drawer.className = 'toc-drawer';
+    drawer.setAttribute('role', 'dialog');
+    drawer.setAttribute('aria-modal', 'true');
+    drawer.setAttribute('aria-labelledby', 'toc-drawer-title');
+    drawer.tabIndex = -1;
     drawer.innerHTML =
       '<div class="toc-drawer-header">' +
-        '<h2>Sections</h2>' +
+        '<h2 id="toc-drawer-title">Sections</h2>' +
         '<button class="toc-drawer-close" aria-label="Close sections">&times;</button>' +
       '</div>' +
       '<nav id="drawer-toc"></nav>';
@@ -708,26 +717,62 @@
     var fab = document.createElement('button');
     fab.className = 'toc-fab';
     fab.setAttribute('aria-label', 'Open table of contents');
+    fab.setAttribute('aria-controls', 'toc-drawer');
+    fab.setAttribute('aria-expanded', 'false');
     fab.innerHTML = '<i class="fas fa-list-ul"></i> Sections';
     document.body.appendChild(fab);
 
     var closeBtn = drawer.querySelector('.toc-drawer-close');
+    var isMobileDrawerViewport = function () {
+      return window.matchMedia('(max-width: 1020px)').matches;
+    };
+
+    var previousFocus = null;
+
+    function trapDrawerFocus(e) {
+      if (e.key !== 'Tab' || !drawer.classList.contains('open')) return;
+      var focusables = drawer.querySelectorAll('button, a[href], [tabindex]:not([tabindex="-1"])');
+      if (!focusables.length) return;
+      var first = focusables[0];
+      var last = focusables[focusables.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
 
     function openDrawer() {
+      if (!isMobileDrawerViewport()) return;
+      if (window.getComputedStyle(drawer).display === 'none') return;
+      previousFocus = document.activeElement;
       drawer.classList.add('open');
       overlay.classList.add('open');
-      document.body.style.overflow = 'hidden';
+      document.body.classList.add('toc-open');
+      fab.setAttribute('aria-expanded', 'true');
+      (closeBtn || drawer).focus();
     }
 
     function closeDrawer() {
+      var wasOpen = drawer.classList.contains('open');
       drawer.classList.remove('open');
       overlay.classList.remove('open');
+      document.body.classList.remove('toc-open');
       document.body.style.overflow = '';
+      fab.setAttribute('aria-expanded', 'false');
+      if (wasOpen && previousFocus && typeof previousFocus.focus === 'function') {
+        previousFocus.focus();
+      }
+      previousFocus = null;
     }
 
     fab.addEventListener('click', openDrawer);
     closeBtn.addEventListener('click', closeDrawer);
     overlay.addEventListener('click', closeDrawer);
+    drawer.addEventListener('keydown', trapDrawerFocus);
 
     // Escape key closes drawer
     document.addEventListener('keydown', function (e) {
@@ -739,10 +784,13 @@
 
     // Auto-close if viewport crosses desktop breakpoint
     window.addEventListener('resize', function () {
-      if (window.innerWidth > 1020 && drawer.classList.contains('open')) {
+      if (!isMobileDrawerViewport() && drawer.classList.contains('open')) {
         closeDrawer();
       }
     });
+
+    // Ensure scroll is restored on page show/back-forward cache restores.
+    window.addEventListener('pageshow', closeDrawer);
 
     return { drawer: drawer, syncToc: syncDrawerToc };
 
