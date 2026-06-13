@@ -27,6 +27,23 @@
     14: 'Appendices'
   };
 
+  const chapterCoverImages = {
+    1: '1.jpg',
+    2: '2.jpg',
+    3: '3.jpg',
+    4: '4.jpg',
+    5: '5.jpg',
+    6: '6.jpg',
+    7: '7.jpg',
+    8: '8.jpg',
+    9: '9.jpg',
+    10: '10.jpg',
+    11: '11.jpg',
+    12: '12.jpg',
+    13: 'summ.jpg',
+    14: 'appendix.jpg'
+  };
+
   const SPECIAL_CHAPTERS = new Set([0, 14]);
   const TOTAL_CHAPTERS = 14;
   let keyboardReady = false;
@@ -622,6 +639,18 @@
     footer.appendChild(right);
   }
 
+  function insertChapterCover(root) {
+    const image = chapterCoverImages[chapterNum];
+    if (!image) return;
+
+    const figure = document.createElement('figure');
+    figure.className = 'chapter-cover-figure';
+    figure.innerHTML = `
+      <img src="thesis-assets/chapter-covers/${image}" alt="Cover art for ${chapterTitles[chapterNum] || `Chapter ${chapterNum}`}" loading="eager" decoding="async">
+    `;
+    root.insertBefore(figure, root.firstChild);
+  }
+
   function formatReferences(root) {
     const headings = Array.from(root.querySelectorAll('h2'));
     const refHeading = headings.find((h) => /^references?$/i.test(cleanText(h.textContent)));
@@ -726,6 +755,10 @@
     var isMobileDrawerViewport = function () {
       return window.matchMedia('(max-width: 1020px)').matches;
     };
+    var syncFabVisibility = function () {
+      var shouldHide = !isMobileDrawerViewport() || window.scrollY < 220;
+      fab.classList.toggle('is-hidden', shouldHide && !drawer.classList.contains('open'));
+    };
 
     var previousFocus = null;
 
@@ -753,6 +786,7 @@
       overlay.classList.add('open');
       document.body.classList.add('toc-open');
       fab.setAttribute('aria-expanded', 'true');
+      fab.classList.remove('is-hidden');
       (closeBtn || drawer).focus();
     }
 
@@ -763,6 +797,7 @@
       document.body.classList.remove('toc-open');
       document.body.style.overflow = '';
       fab.setAttribute('aria-expanded', 'false');
+      syncFabVisibility();
       if (wasOpen && previousFocus && typeof previousFocus.focus === 'function') {
         previousFocus.focus();
       }
@@ -787,10 +822,16 @@
       if (!isMobileDrawerViewport() && drawer.classList.contains('open')) {
         closeDrawer();
       }
+      syncFabVisibility();
     });
+    window.addEventListener('scroll', syncFabVisibility, { passive: true });
 
     // Ensure scroll is restored on page show/back-forward cache restores.
-    window.addEventListener('pageshow', closeDrawer);
+    window.addEventListener('pageshow', function () {
+      closeDrawer();
+      syncFabVisibility();
+    });
+    syncFabVisibility();
 
     return { drawer: drawer, syncToc: syncDrawerToc };
 
@@ -832,6 +873,7 @@
       if (!res.ok) throw new Error(String(res.status));
       const html = await res.text();
       articleEl.innerHTML = html;
+      insertChapterCover(articleEl);
 
       articleEl.querySelectorAll('img').forEach((img) => {
         img.loading = 'lazy';

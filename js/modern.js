@@ -1,10 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Theme toggle functionality
     const themeToggle = document.getElementById('theme-toggle');
     const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
     const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    const navbar = document.querySelector('.navbar');
 
-    // Check for saved theme preference or use OS preference
     const currentTheme = localStorage.getItem('theme') ||
         (prefersDarkScheme.matches ? 'dark' : 'light');
 
@@ -33,10 +32,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Apply the theme on initial load
     applyTheme(currentTheme);
 
-    // Theme toggle click handler
     function toggleTheme() {
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark' ||
             document.body.getAttribute('data-theme') === 'dark';
@@ -50,38 +47,34 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Add event listeners for theme toggles
-    themeToggle.addEventListener('click', toggleTheme);
-    mobileThemeToggle.addEventListener('click', toggleTheme);
+    themeToggle?.addEventListener('click', toggleTheme);
+    mobileThemeToggle?.addEventListener('click', toggleTheme);
 
-    // Mobile menu functionality
     const menuToggle = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
     const mobileMenuClose = document.getElementById('mobile-menu-close');
     const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
 
-    menuToggle.addEventListener('click', function () {
-        mobileMenu.classList.add('active');
-        mobileMenuOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+    menuToggle?.addEventListener('click', function () {
+        mobileMenu?.classList.add('active');
+        mobileMenuOverlay?.classList.add('active');
+        document.body.style.overflow = 'hidden';
     });
 
     function closeMenu() {
-        mobileMenu.classList.remove('active');
-        mobileMenuOverlay.classList.remove('active');
-        document.body.style.overflow = ''; // Restore scrolling
+        mobileMenu?.classList.remove('active');
+        mobileMenuOverlay?.classList.remove('active');
+        document.body.style.overflow = '';
     }
 
-    mobileMenuClose.addEventListener('click', closeMenu);
-    mobileMenuOverlay.addEventListener('click', closeMenu);
+    mobileMenuClose?.addEventListener('click', closeMenu);
+    mobileMenuOverlay?.addEventListener('click', closeMenu);
 
-    // Close mobile menu when clicking on a link
-    const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+    const mobileMenuLinks = mobileMenu?.querySelectorAll('a') || [];
     mobileMenuLinks.forEach(link => {
         link.addEventListener('click', closeMenu);
     });
 
-    // Add smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             if (this.getAttribute('href') !== '#') {
@@ -90,92 +83,110 @@ document.addEventListener('DOMContentLoaded', function () {
                 const targetElement = document.querySelector(targetId);
 
                 if (targetElement) {
-                    // Scroll to the element
                     targetElement.scrollIntoView({
                         behavior: 'smooth'
                     });
 
-                    // Update URL without page jump
                     history.pushState(null, null, targetId);
                 }
             }
         });
     });
 
-    // Add active class to navbar links based on scroll position
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.navbar-links a, .mobile-menu a');
 
     function highlightNavLink() {
         const scrollPosition = window.scrollY + 100; // Offset for fixed header
 
+        let activeId = '';
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.offsetHeight;
             const sectionId = section.getAttribute('id');
 
             if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${sectionId}`) {
-                        link.classList.add('active');
-                    }
-                });
+                activeId = sectionId;
             }
+        });
+
+        navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            const isHomeLink = href === '#' && window.scrollY < 120;
+            link.classList.toggle('active', href === `#${activeId}` || isHomeLink);
         });
     }
 
-    // Add active class to navbar on scroll
-    window.addEventListener('scroll', function () {
-        const navbar = document.querySelector('.navbar');
+    function handleScroll() {
         if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
+            navbar?.classList.add('scrolled');
         } else {
-            navbar.classList.remove('scrolled');
+            navbar?.classList.remove('scrolled');
         }
 
         highlightNavLink();
-    });
+    }
 
-    // Initialize email obfuscation
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
     const emailElement = document.querySelector('.email');
     if (emailElement) {
         try {
-            // This evaluates the reversed email string
-            const emailCode = emailElement.textContent.trim();
-            const emailAddress = eval(emailCode);
+            const reversed = emailElement.dataset.emailReversed || '';
+            const emailAddress = reversed.split('').reverse().join('');
             emailElement.textContent = emailAddress;
             emailElement.setAttribute('title', 'Click to copy email');
+            emailElement.setAttribute('role', 'button');
+            emailElement.setAttribute('tabindex', '0');
 
-            // Add click to copy functionality
+            function showCopiedState() {
+                const originalText = emailAddress;
+                emailElement.textContent = 'Email copied!';
+                window.setTimeout(() => {
+                    emailElement.textContent = originalText;
+                }, 1800);
+            }
+
+            async function copyEmail() {
+                if (!navigator.clipboard?.writeText) {
+                    return;
+                }
+                await navigator.clipboard.writeText(emailAddress);
+                showCopiedState();
+            }
+
             emailElement.addEventListener('click', function () {
-                navigator.clipboard.writeText(emailAddress).then(() => {
-                    const originalText = this.textContent;
-                    this.textContent = 'Email copied!';
-                    setTimeout(() => {
-                        this.textContent = originalText;
-                    }, 2000);
-                });
+                copyEmail().catch(() => { });
+            });
+            emailElement.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    copyEmail().catch(() => { });
+                }
             });
         } catch (e) {
             console.error('Error processing email:', e);
         }
     }
 
-    // Add lazy loading for images
     const images = document.querySelectorAll('img');
     if ('loading' in HTMLImageElement.prototype) {
-        // Browser supports native lazy loading
         images.forEach(img => {
             if (!img.hasAttribute('loading')) {
                 img.setAttribute('loading', 'lazy');
             }
         });
-    } else {
-        // Fallback for browsers that don't support lazy loading
-        // You could add a lazy loading library here if needed
     }
 
-    // Styles are now handled in modern_style.css to ensure consistency
-    // and prevent conflicts with the new design system.
+    document.querySelectorAll('a[target="_blank"]').forEach(anchor => {
+        try {
+            const url = new URL(anchor.href, window.location.href);
+            if (url.origin !== window.location.origin) {
+                anchor.rel = 'noopener noreferrer';
+            }
+        } catch (e) {
+            anchor.rel = 'noopener noreferrer';
+        }
+    });
 });

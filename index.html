@@ -16,21 +16,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description"
-        content="Shan Chen - PhD student at Harvard-MGB AIM specializing in NLP, healthcare AI, and large language models">
+        content="Shan Chen - healthcare AI and NLP researcher and cum laude Ph.D. graduate of Maastricht University">
     <meta name="keywords" content="Shan Chen, Harvard, AI, NLP, healthcare, machine learning, large language models">
     <meta name="author" content="Shan Chen">
 
     <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="Shan Chen - PhD Student at Harvard-MGB AIM">
+    <meta property="og:title" content="Shan Chen - Healthcare AI and NLP Researcher">
     <meta property="og:description" content="Research in NLP, healthcare AI, and large language models">
     <meta property="og:image" content="img/IMG23.jpeg">
-    <meta property="og:url" content="https://kara4141.github.io/modern_index.html">
+    <meta property="og:url" content="https://kara4141.github.io/">
     <meta property="og:type" content="website">
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@shan23chen">
-    <meta name="twitter:title" content="Shan Chen - PhD Student at Harvard-MGB AIM">
+    <meta name="twitter:title" content="Shan Chen - Healthcare AI and NLP Researcher">
     <meta name="twitter:description" content="Research in NLP, healthcare AI, and large language models">
     <meta name="twitter:image" content="img/IMG23.jpeg">
 
@@ -78,7 +78,7 @@
                 </button>
             </div>
 
-            <button id="menu-toggle" class="navbar-toggle">
+            <button id="menu-toggle" class="navbar-toggle" aria-label="Open menu">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
@@ -86,7 +86,7 @@
 
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="mobile-menu">
-        <button id="mobile-menu-close" class="mobile-menu-close">
+        <button id="mobile-menu-close" class="mobile-menu-close" aria-label="Close menu">
             <i class="fas fa-times"></i>
         </button>
         <a href="#">Home</a>
@@ -104,39 +104,43 @@
     <div class="container">
         <div class="two-column-layout">
             <!-- Bio/Sidebar -->
-            <div class="bio glass-panel">
+            <aside class="bio glass-panel">
                 <img src="img/IMG23.jpeg" alt="Kyudo retreat @ NY 2023 Spring." class="fade-in">
                 <p class="mb-1"><small>Kyudo retreat @ NY 2023 Spring.</small></p>
 
                 <div class="bio-links">
-                    <a href="https://scholar.google.com/citations?user=Ftz0NHIAAAAJ&hl=en" target="_blank"><i
+                    <a href="https://scholar.google.com/citations?user=Ftz0NHIAAAAJ&hl=en" target="_blank"
+                        aria-label="Google Scholar"><i
                             class="fas fa-graduation-cap"></i> Google Scholar</a>
-                    <a href="https://github.com/shan23chen" target="_blank"><i class="fab fa-github"></i> Github</a>
-                    <a href="https://www.linkedin.com/in/schen73/" target="_blank"><i class="fab fa-linkedin"></i>
+                    <a href="https://github.com/shan23chen" target="_blank" aria-label="GitHub"><i
+                            class="fab fa-github"></i> GitHub</a>
+                    <a href="https://www.linkedin.com/in/schen73/" target="_blank" aria-label="LinkedIn"><i
+                            class="fab fa-linkedin"></i>
                         LinkedIn</a>
-                    <a href="https://twitter.com/shan23chen" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
-                    <a href="https://aim.hms.harvard.edu/team/shan-chen" target="_blank"><i
+                    <a href="https://twitter.com/shan23chen" target="_blank" aria-label="Twitter"><i
+                            class="fab fa-twitter"></i> Twitter</a>
+                    <a href="https://aim.hms.harvard.edu/team/shan-chen" target="_blank" aria-label="Harvard Website"><i
                             class="fas fa-university"></i> Harvard Website</a>
                 </div>
 
                 <h4>Contact</h4>
-                <div class="email">
-                    ''.join(list('ude.dravrah@358chs')[::-1])
-                </div>
-                <div class="mt-2">
-                    <a href="thesis.html">Read My Thesis</a>
+                <div class="email" data-email-reversed="ude.dravrah@358chs" aria-live="polite"></div>
+                <div class="mt-2 bio-cta-list">
+                    <a class="bio-cta" href="thesis.html">Read My Thesis</a>
                     <p><small>Full web version with chapters, figures, and references</small></p>
-                    <a href="fellowship.html">View My Application Materials</a>
+                    <a class="bio-cta" href="thesis-assets/Shan-Chen-Thesis.pdf" download>Download My Thesis PDF</a>
+                    <p><small>Official digital edition, awarded <i>cum laude</i></small></p>
+                    <a class="bio-cta" href="fellowship.html">View My Application Materials</a>
                     <p><small>In the interest of improving equity in access to application materials</small></p>
                 </div>
-            </div>
+            </aside>
 
             <!-- Main Content -->
             <div class="content">
-                <section class="section fade-in">
-                    <p>
-                        Hi, I am a Ph.D. student at <a href="https://aim.hms.harvard.edu/">Harvard-MGB AIM</a>, jointly
-                        with Maastricht University, under the guidance of <a
+                <section class="section section-intro fade-in">
+                    <p class="intro-lead">
+                        Hi, I am a researcher at <a href="https://aim.hms.harvard.edu/">Harvard-MGB AIM</a>. I earned
+                        my <span class="highlight">Ph.D. cum laude from Maastricht University</span>, under the guidance of <a
                             href="https://aim.hms.harvard.edu/team/hugo-aerts">Hugo Aerts, Ph.D.</a> and <a
                             href="https://www.bittermanlab.org">Danielle S. Bitterman, M.D.</a> My works are supported
                         by the <span class="highlight">2024 Google PhD Fellowship in Natural Language Processing</span>.
@@ -163,7 +167,7 @@
                         the FDA, NCI, and NIH, and has been cited in U.S. congressional hearings.
                     </p>
                     <p>
-                        During COVID-19, I completed with M.S. in Computational Linguistics from <a
+                        During COVID-19, I completed my M.S. in Computational Linguistics from <a
                             href="https://www.brandeis.edu/" target="_blank">Brandeis University</a>, where I was
                         fortunate to be advised by Professor <a
                             href="https://scholarworks.brandeis.edu/esploro/profile/nianwen_xue/overview?emplid=cc59be08d0a43aa426bd6098a41c0c1171822755"
@@ -187,7 +191,8 @@
                         <li class="news-item fade-in">
                             <span class="news-date">[11/11/2025]</span>
                             Our work "When helpfulness backfires: LLMs and the risk of false medical information due to
-                            sycophantic behavior" got hightlight on New York Times, Nature and oral at AMIA 2025!
+                            sycophantic behavior" got highlighted in The New York Times, Nature, and an oral session at
+                            AMIA 2025!
                         </li>
                         <li class="news-item fade-in">
                             <span class="news-date">[01/04/2025]</span>
@@ -216,7 +221,7 @@
                             <span class="news-date">[06/19/2024]</span>
                             <a href="https://huggingface.co/spaces/AIM-Harvard/rabbits-leaderboard"
                                 target="_blank">RABBITS</a> is out! We examined current biomedical benchmarks and found
-                            the language models are more familar with generic terms!
+                            the language models are more familiar with generic terms!
                         </li>
                         <li class="news-item fade-in">
                             <span class="news-date">[05/09/2024]</span>
@@ -382,7 +387,7 @@
                             Danielle S. Bitterman, Majid Afshar, and Timothy Miller</div>
                         <div class="publication-venue">JAMIA</div>
                         <div class="publication-links">
-                            <a href="https://pubmed.ncbi.nlm.nih.gov/38585973/" target="_blank">medrXiv</a>
+                            <a href="https://pubmed.ncbi.nlm.nih.gov/38585973/" target="_blank">PubMed</a>
                             <a href="https://github.com/Machine-Learning-for-Medical-Language/long-clinical-doc"
                                 target="_blank">Code</a>
                             <a href="https://www.codabench.org/competitions/2064/" target="_blank">Coda Bench</a>
@@ -477,7 +482,7 @@
                             Nicolas Ramirez ... Hugo Aerts, Tim Miller, Guergana Savova, Raymond Mak, and Danielle S.
                             Bitterman</div>
                         <div class="publication-venue">JCO CCI</div>
-                        <font color="#B1040E"><b>Oral Presentation @ ASTRO 2023 < 9%</b>
+                        <font color="#B1040E"><b>Oral Presentation @ ASTRO 2023 &lt; 9%</b>
                         </font>
                         <div class="publication-links">
                             <a href="https://www.redjournal.org/article/S0360-3016(23)04364-X/fulltext"
@@ -512,12 +517,12 @@
                     <div class="card fade-in">
                         <h3>Students and projects</h3>
                         <ul>
-                            <li>Pedro Moreria - MIT Master Thesis student, Now MLE at Google</li>
-                            <li>Kuleen Sasse - Undergrad student, Now PhD at JHU</li>
+                            <li>Pedro Moreira - MIT Master Thesis student, Now MLE at Google</li>
+                            <li>Kuleen Sasse - Undergraduate student, now Ph.D. student at JHU</li>
                             <li>Shayan Chowdhury - Undergrad student at Columbia</li>
                             <li>Javier Mora, MD - Harvard Medical School Residency research year 2025</li>
                             <li>Kraig Tou - Master student, Now MLE at AWS Annapurna Labs</li>
-                            <li>Yanan (Lance) Lu - Harvard DBMI Master Thesis student, Now MLE at Tiktok</li>
+                            <li>Yanan (Lance) Lu - Harvard DBMI Master Thesis student, Now MLE at TikTok</li>
                             <li>Nikolaj Munch - Master Thesis student, Now Chief AI Advisor at The Ministry of Foreign
                                 Affairs of Denmark</li>
                             <li>Vikram Goddla - High school student, Now at Harvard College</li>
@@ -532,6 +537,7 @@
                     <div class="card fade-in">
                         <h3>Honors</h3>
                         <ul>
+                            <li>Ph.D. <i>cum laude</i>, Maastricht University, 2026</li>
                             <li>Google PhD Fellowship in Natural Language Processing, 2024</li>
                             <li>CHIL Doctoral Consortium, 2024, 25 (Oral)</li>
                             <li>Brandeis Merit Scholarship, 2020</li>
@@ -578,7 +584,7 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2024 Shan Chen. Last updated in 2025.</p>
+            <p>&copy; 2026 Shan Chen. Last updated in 2026.</p>
         </div>
     </footer>
 
