@@ -8,6 +8,7 @@
 
 
 :root {
+  color-scheme: light;
   /* Rich Color Palette - Harvard Crimson Theme */
   --primary-color: #A41034;
   /* Harvard Crimson */
@@ -71,6 +72,7 @@
 
 /* Dark Theme Variables */
 [data-theme="dark"] {
+  color-scheme: dark;
   --background-color: #0F172A;
   /* Midnight Blue */
   --text-color: #E2E8F0;
@@ -1027,6 +1029,11 @@ footer {
 /* Dark mode overrides for specific components */
 [data-theme="dark"] .publication-authors .highlight {
   border-bottom-color: rgba(129, 140, 248, 0.3);
+}
+
+[data-theme="dark"] .publication-item font,
+[data-theme="dark"] .publication-item font b {
+  color: var(--primary-color) !important;
 }
 
 /* Print styles */
