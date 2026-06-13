@@ -1270,17 +1270,18 @@ body.lightbox-open {
 
 .thesis-publication {
   display: grid;
-  grid-template-columns: minmax(250px, 350px) minmax(0, 1fr);
-  gap: clamp(26px, 5vw, 68px);
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 22px;
   align-items: center;
-  margin: 18px 0 32px;
-  padding: clamp(24px, 4vw, 50px);
+  max-width: 920px;
+  margin: 14px auto 24px;
+  padding: 16px 18px;
   border: 1px solid rgba(202, 156, 29, 0.42);
-  border-radius: 20px;
+  border-radius: 16px;
   background:
-    radial-gradient(circle at 88% 12%, rgba(248, 207, 75, 0.22), transparent 30%),
+    radial-gradient(circle at 88% 12%, rgba(248, 207, 75, 0.16), transparent 34%),
     linear-gradient(145deg, rgba(255, 253, 249, 0.98), rgba(250, 242, 216, 0.92));
-  box-shadow: 0 20px 42px rgba(72, 52, 12, 0.1);
+  box-shadow: 0 12px 26px rgba(72, 52, 12, 0.08);
   overflow: hidden;
 }
 
@@ -1294,17 +1295,17 @@ body.lightbox-open {
 
 .thesis-cover-link {
   display: block;
-  border-radius: 9px;
+  width: 150px;
+  border-radius: 7px;
   overflow: hidden;
   background: #fff;
-  box-shadow: 0 22px 42px rgba(46, 31, 5, 0.22);
-  transform: rotate(-1deg);
+  box-shadow: 0 12px 24px rgba(46, 31, 5, 0.18);
   transition: transform .25s cubic-bezier(.4, 0, .2, 1), box-shadow .25s ease;
 }
 
 .thesis-cover-link:hover {
-  transform: rotate(0) translateY(-4px);
-  box-shadow: 0 28px 52px rgba(46, 31, 5, 0.28);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 28px rgba(46, 31, 5, 0.22);
   opacity: 1;
 }
 
@@ -1315,7 +1316,7 @@ body.lightbox-open {
 }
 
 .thesis-publication-copy {
-  max-width: 650px;
+  min-width: 0;
 }
 
 .thesis-edition-label,
@@ -1324,11 +1325,11 @@ body.lightbox-open {
 }
 
 .thesis-edition-label {
-  margin: 0 0 10px;
+  margin: 0 0 5px;
   color: #9c6c00;
-  font-size: .78em;
+  font-size: .62em;
   font-weight: 700;
-  letter-spacing: .09em;
+  letter-spacing: .07em;
   text-transform: uppercase;
 }
 
@@ -1337,11 +1338,11 @@ body.lightbox-open {
 }
 
 .thesis-publication h2 {
-  margin: 0 0 14px;
+  margin: 0 0 5px;
   color: var(--tr-ink);
   font-family: 'Libre Baskerville', serif;
-  font-size: clamp(1.7em, 3.5vw, 2.55em);
-  line-height: 1.18;
+  font-size: 1.3em;
+  line-height: 1.25;
 }
 
 .thesis-publication h2 em {
@@ -1351,32 +1352,32 @@ body.lightbox-open {
 
 .thesis-publication-copy > p:not(.thesis-edition-label):not(.thesis-publication-meta) {
   max-width: 52ch;
-  margin: 0 0 22px;
+  margin: 0 0 10px;
   color: var(--tr-muted);
-  font-size: 1em;
-  line-height: 1.7;
+  font-size: .78em;
+  line-height: 1.5;
 }
 
 .thesis-pdf-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 18px;
+  gap: 7px;
+  margin-bottom: 8px;
 }
 
 .thesis-pdf-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  min-height: 46px;
-  padding: 10px 16px;
+  gap: 6px;
+  min-height: 36px;
+  padding: 7px 12px;
   border: 1px solid var(--tr-line);
   border-radius: 999px;
   background: rgba(255, 253, 249, 0.78);
   color: var(--tr-ink);
   font-family: 'Space Grotesk', sans-serif;
-  font-size: .82em;
+  font-size: .68em;
   font-weight: 700;
   text-decoration: none;
   transition: transform .18s ease, border-color .18s ease, background .18s ease, color .18s ease;
@@ -1413,7 +1414,7 @@ body.lightbox-open {
 .thesis-publication-meta {
   margin: 0;
   color: var(--tr-muted);
-  font-size: .72em;
+  font-size: .6em;
   letter-spacing: .03em;
 }
 
@@ -1543,9 +1544,7 @@ body.thesis-reader.toc-open {
   }
 
   .thesis-publication {
-    grid-template-columns: minmax(210px, 300px) minmax(0, 1fr);
-    gap: 28px;
-    padding: 28px;
+    max-width: 780px;
   }
 
   .toc-fab {
@@ -1763,33 +1762,52 @@ body.thesis-reader.toc-open {
   }
 
   .thesis-publication {
-    grid-template-columns: 1fr;
-    gap: 24px;
-    margin: 14px 0 26px;
-    padding: 20px 16px 22px;
+    grid-template-columns: 92px minmax(0, 1fr);
+    gap: 12px;
+    margin: 12px 0 20px;
+    padding: 11px;
+    border-radius: 13px;
   }
 
   .thesis-cover-link {
-    width: min(78vw, 330px);
-    margin: 0 auto;
+    width: 92px;
+    margin: 0;
     transform: none;
   }
 
   .thesis-publication-copy {
-    text-align: center;
+    text-align: left;
   }
 
   .thesis-publication-copy > p:not(.thesis-edition-label):not(.thesis-publication-meta) {
-    margin-left: auto;
-    margin-right: auto;
+    display: none;
   }
 
   .thesis-pdf-actions {
-    justify-content: center;
+    gap: 5px;
+    margin-bottom: 5px;
   }
 
   .thesis-pdf-button {
-    flex: 1 1 180px;
+    flex: 0 1 auto;
+    min-height: 32px;
+    padding: 5px 9px;
+    font-size: .62em;
+  }
+
+  .thesis-publication h2 {
+    font-size: 1.02em;
+    margin-bottom: 6px;
+  }
+
+  .thesis-edition-label {
+    font-size: .52em;
+    margin-bottom: 4px;
+  }
+
+  .thesis-publication-meta {
+    font-size: .5em;
+    line-height: 1.35;
   }
 
   .thesis-section-heading {
