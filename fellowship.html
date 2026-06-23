@@ -45,77 +45,26 @@
     <link rel="shortcut icon" href="img/shan.png">
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/modern_style.css">
+    <link rel="stylesheet" href="css/modern_style.css?v=editorial4">
     
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <title>Shan Chen - Fellowship Materials</title>
 
-    <style>
-        .pdf-container {
-            width: 100%;
-            height: 80vh;
-            margin: 20px auto;
-        }
-        
-        .pdf-embed {
-            width: 100%;
-            height: 100%;
-            border: 1px solid #ddd;
-        }
-        
-        .back-link {
-            margin: 20px 0;
-            display: inline-block;
-        }
-        
-        .materials-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .materials-intro {
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-        
-        .download-link {
-            display: inline-block;
-            background-color: #A41034;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 4px;
-            text-decoration: none;
-            margin-bottom: 15px;
-            transition: background-color 0.3s;
-        }
-        
-        .download-link:hover {
-            background-color: #7d0c28;
-            text-decoration: none;
-            color: white;
-        }
-        
-        .dark-mode .download-link {
-            background-color: #2962ff;
-        }
-        
-        .dark-mode .download-link:hover {
-            background-color: #0039cb;
-        }
-    </style>
 </head>
 
-<body>
+<body class="application-page">
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container navbar-container">
-            <a href="index.html" class="navbar-brand">Shan Chen (陈山)</a>
+            <a href="index.html" class="navbar-brand">
+                <span>Shan Chen</span>
+                <small>陈山</small>
+            </a>
             
             <div class="navbar-links">
                 <a href="index.html">Home</a>
@@ -143,36 +92,39 @@
     <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
     
     <!-- Main Content -->
-    <div class="container">
-        <div class="materials-container">
-            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
-            
-            <h1>Fellowship and Application Materials</h1>
-            
-            <div class="materials-intro">
-                <p>In the interest of improving equity in access to application materials, copies of my job and fellowship application states are available here.</p>
-                <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        const email = 'shc358@harvard.edu';
-                        document.getElementById('email-display').textContent = email.split('').reverse().join('');
-                    });
-                </script>
+    <main class="container materials-container">
+        <a href="index.html" class="back-link"><span aria-hidden="true">←</span> Back home</a>
+
+        <header class="materials-hero">
+            <p class="eyebrow">Open application archive</p>
+            <h1>Fellowship and application materials.</h1>
+            <p class="materials-intro">I share selected application materials to make the process a little more
+                transparent and accessible.</p>
+        </header>
+
+        <section class="material-entry" aria-labelledby="google-fellowship-title">
+            <div class="material-entry-copy">
+                <p class="material-number">01 · Fellowship</p>
+                <h2 id="google-fellowship-title">Google PhD Fellowship</h2>
+                <p>My successful 2024 application for the Google PhD Fellowship in Natural Language Processing.</p>
+                <div class="material-actions">
+                    <a href="img/google_fellowship.pdf" target="_blank" rel="noopener">Open PDF <span
+                            aria-hidden="true">↗</span></a>
+                    <a href="img/google_fellowship.pdf" download>Download <span aria-hidden="true">↓</span></a>
+                </div>
             </div>
-            
-            <h2>Google PhD Fellowship 2024</h2>
-            <p><a href="img/google_fellowship.pdf" download class="download-link"><i class="fas fa-download"></i> Download PDF</a></p>
             <div class="pdf-container">
                 <object class="pdf-embed" data="img/google_fellowship.pdf" type="application/pdf">
                     <p>It appears your browser doesn't support embedded PDFs. You can <a href="img/google_fellowship.pdf">download the PDF here</a> instead.</p>
                 </object>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
     
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2024 Shan Chen. Last updated March 2025.</p>
+            <p>&copy; 2026 Shan Chen. Shared to improve access and transparency.</p>
         </div>
     </footer>
     

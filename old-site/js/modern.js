@@ -133,22 +133,18 @@ document.addEventListener('DOMContentLoaded', function () {
     const emailElement = document.querySelector('.email');
     if (emailElement) {
         try {
-            const emailParts = {
-                user: ['shc', '853'].join(''),
-                domain: ['har', 'vard'].join(''),
-                suffix: ['e', 'du'].join('')
-            };
-            const emailAddress = `${emailParts.user}@${emailParts.domain}.${emailParts.suffix}`;
-            const displayedEmail = `${emailParts.user} [at] ${emailParts.domain} [dot] ${emailParts.suffix}`;
-            emailElement.textContent = displayedEmail;
-            emailElement.setAttribute('title', 'Click to copy email address');
+            const reversed = emailElement.dataset.emailReversed || '';
+            const emailAddress = reversed.split('').reverse().join('');
+            emailElement.textContent = emailAddress;
+            emailElement.setAttribute('title', 'Click to copy email');
             emailElement.setAttribute('role', 'button');
             emailElement.setAttribute('tabindex', '0');
 
             function showCopiedState() {
+                const originalText = emailAddress;
                 emailElement.textContent = 'Email copied!';
                 window.setTimeout(() => {
-                    emailElement.textContent = displayedEmail;
+                    emailElement.textContent = originalText;
                 }, 1800);
             }
 
