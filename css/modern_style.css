@@ -256,26 +256,9 @@ h4 {
 .bio img {
   display: block;
   width: 100%;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 1;
   object-fit: cover;
-  object-position: center 40%;
-  filter: saturate(0.76) contrast(0.95);
-}
-
-.portrait-caption {
-  display: flex;
-  gap: 16px;
-  margin: 10px 0 0;
-  color: var(--muted);
-  font-size: 0.62rem;
-  font-weight: 600;
-  letter-spacing: 0.09em;
-  line-height: 1.5;
-  text-transform: uppercase;
-}
-
-.portrait-caption span {
-  color: var(--accent);
+  object-position: center;
 }
 
 .bio-links {
@@ -734,8 +717,8 @@ footer p {
   }
 
   .bio img {
-    aspect-ratio: 4 / 5;
-    object-position: center 38%;
+    aspect-ratio: 1;
+    object-position: center;
   }
 
   .focus-strip {
